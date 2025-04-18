@@ -1,13 +1,21 @@
 # vite-i18n-by-design
 
-> 🔌 A Vite plugin that automatically loads and merges Vue I18n messages from a structured `locales/` directory (organized by locale and namespace). Supports hot reload during development.
+[![npm version](https://img.shields.io/npm/v/vite-i18n-by-design.svg)](https://www.npmjs.com/package/vite-i18n-by-design)
+[![MIT License](https://img.shields.io/npm/l/vite-i18n-by-design.svg)](LICENSE)
 
-## 📦 Features
+> 🔌 Vite plugin that automatically loads and merges Vue I18n messages from a structured `locales/` directory (organized by locale and namespace). Supports hot reload and offers direct typed message access.
 
-- ✅ Structured folder support: `locales/fr/component1.json`, `locales/en/component1.json`, etc.
-- 🔁 Auto-merging of messages under each locale and namespace
-- ⚡️ Vite dev server hot-reload support
-- ✨ TypeScript support with virtual module declaration
+---
+
+## 🚀 Features
+
+- ✅ Load `locales/<lang>/<namespace>.json` files automatically
+- 🔁 Merge translations by locale and namespace
+- ⚡️ HMR support in dev mode via virtual module (`virtual:i18n-messages`)
+- 🧠 Direct static `messages` import (no virtual module required)
+- 💪 Full TypeScript support, no config needed
+
+---
 
 ## 📁 Folder structure example
 
@@ -47,13 +55,17 @@ Becomes:
 }
 ```
 
-## 🚀 Installation
+---
+
+## 📦 Installation
 
 ```bash
 npm install vite-i18n-by-design --save-dev
 ```
 
-## 🧩 Usage in `vite.config.ts`
+---
+
+## 🔌 Usage in `vite.config.ts`
 
 ```ts
 import { defineConfig } from 'vite';
@@ -70,31 +82,49 @@ export default defineConfig({
 });
 ```
 
-## 🗣 Usage in your app
+---
+
+## 🧠 Static usage (recommended for production)
 
 ```ts
+// i18n.ts
 import { createI18n } from 'vue-i18n';
-import messages from 'virtual:i18n-messages';
+import { messages } from 'vite-i18n-by-design';
 
-export const i18n = createI18n({
-  legacy: false,
+const i18n = createI18n({
   locale: 'fr',
   fallbackLocale: 'en',
   messages,
 });
 ```
 
-## 🧠 TypeScript support
+---
 
-If you use TypeScript and want to avoid "Cannot find module 'virtual:i18n-messages'" errors, add the following declaration to your app:
+## 🧪 Dev HMR usage (optional, supports `virtual:` module)
 
 ```ts
-// types/virtual-i18n-messages.d.ts
-declare module 'virtual:i18n-messages' {
-  const messages: Record<string, Record<string, Record<string, string>>>;
-  export default messages;
-}
+// i18n.ts (dev mode)
+import messages from 'virtual:i18n-messages';
+
+const i18n = createI18n({
+  locale: 'fr',
+  messages,
+});
 ```
+
+✅ Types for `virtual:i18n-messages` are included — no need to declare anything manually.
+
+---
+
+## 🛠 Advanced Options
+
+```ts
+i18nLoaderPlugin({
+  localesDir: 'my/custom/dir'
+});
+```
+
+---
 
 ## 🪪 License
 
