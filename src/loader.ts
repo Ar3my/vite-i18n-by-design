@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
 export type I18nMessages = Record<string, Record<string, Record<string, string>>>;
 
