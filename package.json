@@ -11,7 +11,7 @@
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp ./types/virtual-i18n-messages.d.ts ./dist/",
     "prepublishOnly": "npm run build"
   },
   "author": "Antoine Remy",
