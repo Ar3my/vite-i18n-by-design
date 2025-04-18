@@ -1,6 +1,6 @@
 {
   "name": "vite-i18n-by-design",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Vite plugin for merging i18n JSON files structured by locale and namespace.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
