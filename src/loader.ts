@@ -5,6 +5,8 @@ export type I18nMessages = Record<string, Record<string, Record<string, string>>
 
 export function loadMessages(localesDir: string): I18nMessages {
   const messages: I18nMessages = {};
+  if (!fs.existsSync(localesDir)) return messages;
+
   const locales: string[] = fs.readdirSync(localesDir);
 
   for (const locale of locales) {

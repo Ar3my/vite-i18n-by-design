@@ -1,7 +1,8 @@
 import path = require('path');
-import { loadMessages } from './loader';
+import { loadMessages as internalLoadMessages } from './loader';
 import i18nLoaderPlugin from './plugin';
 
-export const messages = loadMessages(path.resolve(process.cwd(), 'locales'));
+export const loadMessages = (dir: string = 'locales') =>
+  internalLoadMessages(path.resolve(process.cwd(), dir));
 
 export default i18nLoaderPlugin;
