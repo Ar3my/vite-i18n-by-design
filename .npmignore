@@ -1,0 +1,18 @@
+
+# Ignore source files
+src/
+types/
+
+# Ignore config files and metadata
+.gitignore
+.npmignore
+tsconfig.json
+vite.config.ts
+README.md
+
+# Ignore test and CI files
+tests/
+.github/
+
+# Ignore local env files
+.env
