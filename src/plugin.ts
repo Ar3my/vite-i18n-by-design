@@ -1,9 +1,6 @@
-import path = require('path');
+import path from 'path';
 import type { Plugin, ViteDevServer } from 'vite';
-import { loadMessages } from './loader';
-
-const VIRTUAL_MODULE_ID = 'virtual:i18n-messages';
-const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
+import { loadMessages } from './loader.js';
 
 export interface I18nLoaderPluginOptions {
   localesDir?: string;
@@ -17,10 +14,10 @@ export default function i18nLoaderPlugin(options: I18nLoaderPluginOptions = {}):
     name: 'vite-i18n-by-design',
     enforce: 'pre',
     resolveId(id: string): string | undefined {
-      if (id === VIRTUAL_MODULE_ID) return RESOLVED_VIRTUAL_MODULE_ID;
+      if (id === 'virtual:i18n-messages') return '\0virtual:i18n-messages';
     },
     load(id: string): string | undefined {
-      if (id === RESOLVED_VIRTUAL_MODULE_ID) {
+      if (id === '\0virtual:i18n-messages') {
         const messages = loadMessages(fullPath);
         return `export default ${JSON.stringify(messages, null, 2)};`;
       }
