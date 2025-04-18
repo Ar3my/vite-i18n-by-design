@@ -1,4 +1,4 @@
-import path from 'path';
+import path = require('path');
 import type { Plugin, ViteDevServer } from 'vite';
 import { loadMessages } from './loader';
 

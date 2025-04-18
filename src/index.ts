@@ -1,4 +1,4 @@
-import path from 'path';
+import path = require('path');
 import { loadMessages } from './loader';
 import i18nLoaderPlugin from './plugin';
 
