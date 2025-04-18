@@ -12,7 +12,7 @@
 - ✅ Load `locales/<lang>/<namespace>.json` files automatically
 - 🔁 Merge translations by locale and namespace
 - ⚡️ HMR support in dev mode via virtual module (`virtual:i18n-messages`)
-- 🧠 Direct static `messages` import (no virtual module required)
+- 🧠 Call `loadMessages()` manually to avoid auto-execution errors
 - 💪 Full TypeScript support, no config needed
 
 ---
@@ -27,14 +27,6 @@ locales/
   en/
     app.json
     dashboard.json
-```
-
-```jsonc
-// locales/fr/app.json
-{
-  "hello": "Bonjour",
-  "bye": "Au revoir"
-}
 ```
 
 Becomes:
@@ -84,14 +76,15 @@ export default defineConfig({
 
 ---
 
-## 🧠 Static usage (recommended for production)
+## 🧠 Usage in `i18n.ts`
 
 ```ts
-// i18n.ts
 import { createI18n } from 'vue-i18n';
-import { messages } from 'vite-i18n-by-design';
+import { loadMessages } from 'vite-i18n-by-design';
 
-const i18n = createI18n({
+const messages = loadMessages();
+
+export default createI18n({
   locale: 'fr',
   fallbackLocale: 'en',
   messages,
@@ -100,10 +93,9 @@ const i18n = createI18n({
 
 ---
 
-## 🧪 Dev HMR usage (optional, supports `virtual:` module)
+## 🧪 Optional HMR mode for dev
 
 ```ts
-// i18n.ts (dev mode)
 import messages from 'virtual:i18n-messages';
 
 const i18n = createI18n({
@@ -112,17 +104,7 @@ const i18n = createI18n({
 });
 ```
 
-✅ Types for `virtual:i18n-messages` are included — no need to declare anything manually.
-
----
-
-## 🛠 Advanced Options
-
-```ts
-i18nLoaderPlugin({
-  localesDir: 'my/custom/dir'
-});
-```
+Types for `virtual:i18n-messages` are included.
 
 ---
 
