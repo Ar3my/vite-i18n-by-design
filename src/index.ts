@@ -12,9 +12,3 @@ export function i18nLoaderPlugin(options?: I18nLoaderPluginOptions) {
 }
 
 export default i18nLoaderPlugin;
-
-declare module 'virtual:i18n-messages' {
-  import type { I18nMessages } from './loader.js';
-  const messages: I18nMessages;
-  export default messages;
-}
