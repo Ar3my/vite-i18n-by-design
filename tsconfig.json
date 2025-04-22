@@ -11,5 +11,5 @@
     "types": ["node"],
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "types"]
+  "include": ["src/types.d.ts", "src"]
 }
